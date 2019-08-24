@@ -5,5 +5,5 @@ export const DataTypes = {
 
 
 export const ActionTypes = {
-    DATA_LOAD = "data_load"
+    DATA_LOAD : "data_load"
 }
