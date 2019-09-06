@@ -24,7 +24,7 @@ export class Checkout extends Component{
             quantity: item.quantity, product_id: item.product.id})) }
         this.props.placeOrder(order);
         this.props.clearCart();
-        this.props.history.push("/shop/cart");
+        this.props.history.push("/shop/thanks");
     }
 
 

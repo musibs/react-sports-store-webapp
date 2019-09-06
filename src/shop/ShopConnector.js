@@ -25,27 +25,35 @@ const mapDispatchToProps = {
 
 export const ShopConnector = connect(mapStateToProps, mapDispatchToProps)(
     class extends Component {
-    render() {
-    return <Switch>
-    <Redirect from="/shop/products/:category"
-    to="/shop/products/:category/1" exact={ true } />
-    <Route path={ "/shop/products/:category/:page" }
-    render={ (routeProps) =>
-    <DataGetter { ...this.props } { ...routeProps }>
-    <Shop { ...this.props } { ...routeProps } />
-    </DataGetter>
-    } />
-    <Route path="/shop/cart" render={ (routeProps) =>
-    <CartDetails { ...this.props } { ...routeProps } />} />
-    <Route path="/shop/checkout" render={ routeProps =>
-    <Checkout { ...this.props } { ...routeProps } /> } />
-    <Route path="/shop/thanks" render={ routeProps =>
-    <Thanks { ...this.props } { ...routeProps } /> } />
-    <Redirect to="/shop/products/all/1" />
-    </Switch>
+        render(){
+            console.log(`Somnath: ${this.props}`);
+            return <Switch>
+                <Redirect 
+                    from="/shop/products/:category" 
+                    to="/shop/products/:category/1" 
+                    exact={true} />
+                <Route path={"/shop/products/:category/:page"}
+                    render={ (routeProps) => 
+                        <DataGetter {...this.props} {...routeProps}>
+                            <Shop { ...this.props } {...routeProps} />
+                        </DataGetter>
+                    } />
+                <Route path="/shop/cart" render={(routeProps) => 
+                    <CartDetails {...this.props} {...routeProps} />} />
+
+                <Route path ="/shop/checkout" render={ routeProps=> 
+                    <Checkout {...this.props} {...routeProps} /> } />
+
+                <Route path="/shop/thanks" render = {routeProps => 
+                    <Thanks {...this.props} {...routeProps} /> } />
+            
+                <Redirect to="/shop/products/all/1" />
+            </Switch>
+        }
+
+        componentDidMount(){
+            this.props.loadData(DataTypes.CATEGORIES);
+            //</Switch>this.props.loadData(DataTypes.PRODUCTS);
+        }
     }
-    componentDidMount() {
-    this.props.loadData(DataTypes.CATEGORIES);
-    }
-    }
-   )
+)
